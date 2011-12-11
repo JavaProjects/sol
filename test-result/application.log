@@ -1,0 +1,101 @@
+29 Nov 2011 17:16:42,191 INFO  ~ Starting C:\workspace\sol
+29 Nov 2011 17:16:42,198 INFO  ~ Module gae is available (C:\play-1.2.3\modules\gae-1.4)
+29 Nov 2011 17:16:42,199 INFO  ~ Module siena is available (C:\play-1.2.3\modules\siena-2.0.5)
+29 Nov 2011 17:16:48,071 WARN  ~ 
+29 Nov 2011 17:16:48,072 WARN  ~ Google App Engine module
+29 Nov 2011 17:16:48,073 WARN  ~ ~~~~~~~~~~~~~~~~~~~~~~~
+29 Nov 2011 17:16:48,074 WARN  ~ No Google App Engine environment found. Setting up a development environement
+29 Nov 2011 17:16:48,414 WARN  ~ Don't forget to define your GAE application id in the 'war/WEB-INF/appengine-web.xml' file
+29 Nov 2011 17:16:48,416 WARN  ~ 
+29 Nov 2011 17:16:48,417 INFO  ~ Detected that plugin 'play.modules.gae.GAEPlugin@15bc6c8' disabled the plugin 'play.jobs.JobsPlugin@e29820' the old way - should use Play.disablePlugin()
+29 Nov 2011 17:16:48,419 WARN  ~ You're running Play! in DEV mode
+29 Nov 2011 17:16:49,460 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+29 Nov 2011 17:18:31,784 INFO  ~ Application 'SOL' is now started !
+29 Nov 2011 17:18:51,533 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 17:18:51,974 INFO  ~ Time to load datastore: 141 ms
+29 Nov 2011 17:18:52,161 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 17:18:52,294 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 17:18:52,296 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 17:19:21,976 INFO  ~ Time to persist datastore: 2 ms
+29 Nov 2011 17:20:51,397 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 17:20:51,438 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 17:20:51,579 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 17:20:51,583 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 17:20:51,982 INFO  ~ Time to persist datastore: 7 ms
+29 Nov 2011 17:22:17,427 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 17:22:17,434 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 17:22:17,439 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 17:22:17,444 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 17:22:21,982 INFO  ~ Time to persist datastore: 2 ms
+29 Nov 2011 17:28:37,947 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 17:28:37,955 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 17:28:37,978 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 17:28:37,982 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 17:28:51,971 INFO  ~ Time to persist datastore: 1 ms
+29 Nov 2011 18:05:41,955 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 18:05:41,967 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 18:05:42,040 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 18:05:42,072 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 18:05:42,082 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 18:05:42,084 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 18:05:51,905 INFO  ~ Time to persist datastore: 9 ms
+29 Nov 2011 18:10:02,101 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 18:10:02,106 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 18:10:02,156 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 18:10:02,158 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 18:10:02,167 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 18:10:02,171 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 18:10:21,906 INFO  ~ Time to persist datastore: 7 ms
+29 Nov 2011 18:13:00,019 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 18:13:00,022 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 18:13:00,081 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 18:13:00,095 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 18:13:00,120 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 18:13:00,123 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 18:13:21,904 INFO  ~ Time to persist datastore: 3 ms
+29 Nov 2011 19:31:14,673 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 19:31:14,682 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 19:31:14,740 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 19:31:14,742 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 19:31:14,748 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 19:31:14,750 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 19:31:21,749 INFO  ~ Time to persist datastore: 1 ms
+29 Nov 2011 19:31:56,000 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 19:31:56,001 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 19:31:56,055 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 19:31:56,064 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 19:31:56,074 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 19:31:56,076 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 19:32:21,756 INFO  ~ Time to persist datastore: 9 ms
+29 Nov 2011 19:50:42,276 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 19:50:42,283 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 19:50:42,300 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 19:50:42,302 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 19:50:42,313 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 19:50:42,315 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 19:50:51,721 INFO  ~ Time to persist datastore: 2 ms
+29 Nov 2011 19:58:02,403 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 19:58:02,411 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 19:58:02,446 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 19:58:02,448 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 19:58:02,457 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 19:58:02,459 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 19:58:21,708 INFO  ~ Time to persist datastore: 2 ms
+29 Nov 2011 20:27:33,642 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 20:27:33,653 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 20:27:33,715 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 20:27:33,718 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 20:27:33,735 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 20:27:33,738 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 20:27:33,767 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 20:27:33,769 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 20:27:51,667 INFO  ~ Time to persist datastore: 14 ms
+29 Nov 2011 20:28:24,550 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 20:28:24,556 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 20:28:24,588 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 20:28:24,590 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 20:28:24,602 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 20:28:24,603 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 20:28:24,615 WARN  ~ Fixtures : unable to disable constraints, unsupported database : 
+29 Nov 2011 20:28:24,620 WARN  ~ Fixtures : unable to enable constraints, unsupported database : 
+29 Nov 2011 20:28:51,677 INFO  ~ Time to persist datastore: 1 ms

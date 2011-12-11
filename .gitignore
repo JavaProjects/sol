@@ -1,0 +1,17 @@
+*.class
+*.pyc
+*.db
+*.settings
+*.project
+db/*
+index
+.classpath
+.idea
+*.iml
+*.ipr
+*.iws
+eclipse
+tmp
+.DS_Store
+.tmp_*
+
