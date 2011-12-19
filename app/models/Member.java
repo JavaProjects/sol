@@ -19,6 +19,9 @@ public class Member   {
 	
 	public String address;  
 	
+	public Double latitude;
+	public Double longitude;
+	
 	public Member(String title, String firstName, String  lastName, Date dob, String address) {
 		this.title = title;
 		this.firstName = firstName;

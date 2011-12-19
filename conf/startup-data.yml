@@ -1,0 +1,24 @@
+# you describe your data using the YAML notation here
+# and then load them using Fixtures.load("data.yml")
+
+Learner(jane):
+  member.title: Miss
+  member.firstName: Jane
+  member.lastName: Fonda
+  member.dob: 31/12/1980
+  member.address: "544 Cruise Street Sydney"
+  member.email: jane@foo.com
+  
+
+HubCoordinator(hc1):
+  member.title: Mr.
+  member.firstName: Edward
+  member.lastName: Smith
+  member.dob: 20/12/1970
+  member.address: "5441 Main Street Sydney"  
+  member.email: eds@foo.com
+  
+Hub(hub1):
+  address: "1600 Amphitheatre Pkwy, Mountain View, CA"
+  
+        

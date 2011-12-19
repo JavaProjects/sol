@@ -88,7 +88,7 @@ p("<style type=\"text/css\">\n" +
 "\n" + 
 "	\n" + 
 "\n" + 
-"      function initialize() {\n" + 
+"      function initialize2() {\n" + 
 "    	  \n" + 
 "    	  \n" + 
 "    	  \n" + 
@@ -133,12 +133,122 @@ p("<style type=\"text/css\">\n" +
 "      function loadScript() {\n" + 
 "        var script = document.createElement('script');\n" + 
 "        script.type = 'text/javascript';\n" + 
+"        // supported languages https://spreadsheets.google.com/pub?key=p9pdwsai2hDMsLkXsoM05KQ&gid=1 \n" + 
 "        script.src = 'http://maps.googleapis.com/maps/api/js?sensor=false&' +\n" + 
-"            'callback=initialize';\n" + 
+"            'callback=initialize&language=en-AU&region=au';\n" + 
 "        document.body.appendChild(script);\n" + 
 "      }\n" + 
 "\n" + 
 "      window.onload = loadScript;\n" + 
+"      \n" + 
+"      var infowindow = null;\n" + 
+"      var markers = [];\n" + 
+"      \n" + 
+"      function initialize() {\n" + 
+"    	  infowindow = new google.maps.InfoWindow({content: \"some content\"});\n" + 
+"    	  var myOptions = {\n" + 
+"    	    zoom: 10,\n" + 
+"    	    center: new google.maps.LatLng(-33.9, 151.2),\n" + 
+"    	    mapTypeId: google.maps.MapTypeId.ROADMAP\n" + 
+"    	  }\n" + 
+"    	  var map = new google.maps.Map(document.getElementById(\"map_canvas\"),\n" + 
+"    	                                myOptions);\n" + 
+"\n" + 
+"    	  setMarkers(map, beaches);\n" + 
+"    	  \n" + 
+"    	  for (var i = 0; i < markers.length; i++) {\n" + 
+"    		  var marker = markers[i];\n" + 
+"    		  google.maps.event.addListener(marker, 'click', function() { \n" + 
+"    			  infowindow.setContent(this.html);\n" + 
+"    			  infowindow.open(map,this);\n" + 
+"    			  \n" + 
+"    		  });\n" + 
+"    	  }\n" + 
+"    	}\n" + 
+"\n" + 
+"    	/**\n" + 
+"    	 * Data for the markers consisting of a name, a LatLng and a zIndex for\n" + 
+"    	 * the order in which these markers should display on top of each\n" + 
+"    	 * other.\n" + 
+"    	 */\n" + 
+"    	var beaches = [\n" + 
+"    	  ['Hub Address: Bondi Beach', -33.890542, 151.274856, 4],\n" + 
+"    	  ['Hub Address: Coogee Beach', -33.923036, 151.259052, 5],\n" + 
+"    	  ['Hub Address: Cronulla Beach', -34.028249, 151.157507, 3],\n" + 
+"    	  ['Hub Address: Manly Beach', -33.80010128657071, 151.28747820854187, 2],\n" + 
+"    	  ['Hub Address: Maroubra Beach', -33.950198, 151.259302, 1]\n" + 
+"    	];\n" + 
+"    	\n" + 
+"    	\n" + 
+"    	var infowindows = [];\n" + 
+"    	\n" + 
+"\n" + 
+"    	function setMarkers(map, locations) {\n" + 
+"    	  // Add markers to the map\n" + 
+"\n" + 
+"    	  // Marker sizes are expressed as a Size of X,Y\n" + 
+"    	  // where the origin of the image (0,0) is located\n" + 
+"    	  // in the top left of the image.\n" + 
+"\n" + 
+"    	  // Origins, anchor positions and coordinates of the marker\n" + 
+"    	  // increase in the X direction to the right and in\n" + 
+"    	  // the Y direction down.\n" + 
+"    	  var image = new google.maps.MarkerImage('/public/images/beachflag.png',\n" + 
+"    	      // This marker is 20 pixels wide by 32 pixels tall.\n" + 
+"    	      new google.maps.Size(20, 32),\n" + 
+"    	      // The origin for this image is 0,0.\n" + 
+"    	      new google.maps.Point(0,0),\n" + 
+"    	      // The anchor for this image is the base of the flagpole at 0,32.\n" + 
+"    	      new google.maps.Point(0, 32));\n" + 
+"    	  var shadow = new google.maps.MarkerImage('/public/images/beachflag_shadow.png',\n" + 
+"    	      // The shadow image is larger in the horizontal dimension\n" + 
+"    	      // while the position and offset are the same as for the main image.\n" + 
+"    	      new google.maps.Size(37, 32),\n" + 
+"    	      new google.maps.Point(0,0),\n" + 
+"    	      new google.maps.Point(0, 32));\n" + 
+"    	      // Shapes define the clickable region of the icon.\n" + 
+"    	      // The type defines an HTML &lt;area&gt; element 'poly' which\n" + 
+"    	      // traces out a polygon as a series of X,Y points. The final\n" + 
+"    	      // coordinate closes the poly by connecting to the first\n" + 
+"    	      // coordinate.\n" + 
+"    	  var shape = {\n" + 
+"    	      coord: [1, 1, 1, 20, 18, 20, 18 , 1],\n" + 
+"    	      type: 'poly'\n" + 
+"    	  };\n" + 
+"    	  for (var i = 0; i < locations.length; i++) {\n" + 
+"    	    var beach = locations[i];\n" + 
+"    	    var myLatLng = new google.maps.LatLng(beach[1], beach[2]);\n" + 
+"    	    var marker = new google.maps.Marker({\n" + 
+"    	        position: myLatLng,\n" + 
+"    	        map: map,\n" + 
+"    	        shadow: shadow,\n" + 
+"    	        icon: image,\n" + 
+"    	        shape: shape,\n" + 
+"    	        title: beach[0],\n" + 
+"    	        zIndex: beach[3]\n" + 
+"    	    });\n" + 
+"    	    \n" + 
+"    	    marker.html = marker.title;\n" + 
+"    	    \n" + 
+"    	    markers.push(marker);\n" + 
+"    	    \n" + 
+"    	    //var infowindow = new google.maps.InfoWindow({    content: beach[0]});\n" + 
+"    	    //infowindows[i] = new google.maps.InfoWindow({    content: beach[0]});\n" + 
+"    	    //markers[i] = marker;\n" + 
+"    	    \n" + 
+"    	    //google.maps.event.addListener(marker, 'click', function() {  infowindow.open(map,marker);});\n" + 
+"    	    \n" + 
+"    	  }\n" + 
+"    	  \n" + 
+"    	  \n" + 
+"    	  \n" + 
+"    	}\n" + 
+"      \n" + 
+" \n" + 
+"      \n" + 
+"      \n" + 
+"      \n" + 
+"      \n" + 
 "    </script>\n" + 
 "\n" + 
 "<div class=\"page-header\">\n" + 
