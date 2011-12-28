@@ -11,5 +11,7 @@ GET     /                                       MainController.index
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
+GET     /webservices/hubs               RESTfulServicesController.hubs(format:'json') 
+
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}

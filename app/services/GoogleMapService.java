@@ -34,6 +34,7 @@ public class GoogleMapService {
 
 		Boolean dataLoaded = Cache.get("dataLoaded", Boolean.class);
 		if (dataLoaded == null) {
+			SienaFixtures.deleteDatabase();
 			SienaFixtures.loadModels("startup-data.yml");
 			Cache.set("dataLoaded", true);
 		}
@@ -55,7 +56,7 @@ public class GoogleMapService {
 		for (Hub hub : hubs) {
 
 			String address = hub.address;
-			params.add("address", address);
+			params.putSingle("address", address);
 
 			// get method here maps to RESTful HTTP GET verb
 			ClientResponse response = webResource.queryParams(params).get(ClientResponse.class);
@@ -92,7 +93,7 @@ public class GoogleMapService {
 					hub.latitude = lat;
 					hub.longitude = lng;
 					// change to formatted address as returned by Google Map API
-					hub.address = fAddress;
+					//hub.address = fAddress;
 					hub.save();
 				}
 				else {

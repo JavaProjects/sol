@@ -19,6 +19,27 @@ HubCoordinator(hc1):
   member.email: eds@foo.com
   
 Hub(hub1):
-  address: "1600 Amphitheatre Pkwy, Mountain View, CA"
+  address: 113 Tranby Drv, Baldivis WA 6171
+
+Hub(hub2):
+  address: 4 Ellinis Mews Port, Melbourne VIC 3207 
+  
+Hub(hub3): 
+  address: 9 Lynch Crt, Mt Martha VIC 3934
+  
+Hub(hub4):  
+  address: 7 Casius St, Woodridge QLD 4114
+  
+Hub(hub5):
+  address: 73 Shanke Crs, Kings Langley NSW 2147    
+  
+Hub(hub6): 
+  address: 150 Wells St, Newtown NSW 2042
+  
+Hub(hub7):
+  address: 417 King Drv, Woodridge WA 6041
+  
+Hub(hub8):
+  address: 12 South Pacific Drv, Seaford Meadows SA 5169         
   
         

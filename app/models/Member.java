@@ -22,7 +22,7 @@ public class Member   {
 	public Double latitude;
 	public Double longitude;
 	
-	public Member(String title, String firstName, String  lastName, Date dob, String address) {
+	public Member(String title, String firstName, String  lastName, String email, Date dob, String address) {
 		this.title = title;
 		this.firstName = firstName;
 		this.lastName = lastName;

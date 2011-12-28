@@ -82,53 +82,44 @@ p("<style type=\"text/css\">\n" +
 "  height: 100%;\n" + 
 "  height: 650px;\n" + 
 "}\n" + 
+".error {\n" + 
+"color: red;\n" + 
+"\n" + 
+"}\n" + 
 "</style>\n" + 
 "\n" + 
 "<script type=\"text/javascript\">\n" + 
 "\n" + 
-"	\n" + 
-"\n" + 
-"      function initialize2() {\n" + 
-"    	  \n" + 
-"    	  \n" + 
-"    	  \n" + 
-"    	  \n" + 
-"    	   var geo = new google.maps.Geocoder();\n" + 
-"  		//var grq = new google.maps.GeocoderRequest({address: \"2300 E Harvard Ave Denver, CO 80210\"}); \n" + 
-"  		//Debugger;\n" + 
-"  		 var geocoderRequest = {\n" + 
-"  				address : \"2300 E Harvard Ave Denver, CO 80210\"\n" + 
-"  			};\n" + 
-"  		//var latLng;\n" + 
-"  		geo.geocode(geocoderRequest,   function(array, status) {\n" + 
-"  			//debugger;\n" + 
+"	 var selectedHubId;\n" + 
+"	 function checkAddress() {\n" + 
+"		 \n" + 
+"		 var address = $(\"#address\")[0].value;\n" + 
+"		 map.setZoom(12);\n" + 
+"		 \n" + 
+"		 var geo = new google.maps.Geocoder();\n" + 
+"	  	 var geocoderRequest = { address : address 	};\n" + 
+"	  	 geo.geocode(geocoderRequest,   function(array, status) {\n" + 
 "  			if ( status == google.maps.GeocoderStatus.OK) {\n" + 
 "  				var latLng = array[0].geometry.location;\n" + 
-"  				/* for (i=0; i < array.length; i++) {\n" + 
-"  					// GeoCoderResult object array[i]\n" + 
-"  					var geometry = array[i].geometry; // google.maps.GeocoderGeometry object\n" + 
-"  					latLng = geometry.location;\n" + 
-"  					var tt = \"gg\";\n" + 
-"  					\n" + 
-"  				} */\n" + 
+"  				map.setCenter(latLng);\n" + 
 "  				\n" + 
-"  				var ss = \"ddd\";\n" + 
-"  		        var myOptions = {\n" + 
-"  		          zoom: 8,\n" + 
-"  		          center: latLng, //new google.maps.LatLng(-34.397, 150.644),\n" + 
-"  		          mapTypeId: google.maps.MapTypeId.ROADMAP\n" + 
-"  		        };\n" + 
-"\n" + 
-"  		        var map = new google.maps.Map(document.getElementById('map_canvas'),\n" + 
-"  		            myOptions);\n" + 
+"  				var marker = new google.maps.Marker({\n" + 
+"  	    	        position: latLng,\n" + 
+"  	    	        map: map,\n" + 
+"  	    	    });\n" + 
 "  				\n" + 
 "  			}\n" + 
-"  			\n" + 
-"  			\n" + 
-"  		});  \n" + 
-"    	  \n" + 
-"    	\n" + 
-"      }\n" + 
+"  		}); \n" + 
+"		 \n" + 
+"		 return false;\n" + 
+"	 }\n" + 
+"	 \n" + 
+"	 function selectHub(id) {\n" + 
+"		 selectedHubId = id;\n" + 
+"		 $('#hubId').val(id);\n" + 
+"		 return false;\n" + 
+"		 \n" + 
+"	 }\n" + 
 "\n" + 
 "      function loadScript() {\n" + 
 "        var script = document.createElement('script');\n" + 
@@ -144,26 +135,33 @@ p("<style type=\"text/css\">\n" +
 "      var infowindow = null;\n" + 
 "      var markers = [];\n" + 
 "      \n" + 
+"      var hubs = [];\n" + 
+"      \n" + 
+"      var map;\n" + 
+"      \n" + 
 "      function initialize() {\n" + 
 "    	  infowindow = new google.maps.InfoWindow({content: \"some content\"});\n" + 
 "    	  var myOptions = {\n" + 
-"    	    zoom: 10,\n" + 
-"    	    center: new google.maps.LatLng(-33.9, 151.2),\n" + 
+"    	    zoom: 4,\n" + 
+"    	    center: new google.maps.LatLng(-23.70021, 133.88061),      // (-33.9, 151.2),\n" + 
 "    	    mapTypeId: google.maps.MapTypeId.ROADMAP\n" + 
 "    	  }\n" + 
-"    	  var map = new google.maps.Map(document.getElementById(\"map_canvas\"),\n" + 
+"    	  // this will display the map\n" + 
+"    	  map = new google.maps.Map(document.getElementById(\"map_canvas\"),\n" + 
 "    	                                myOptions);\n" + 
-"\n" + 
-"    	  setMarkers(map, beaches);\n" + 
 "    	  \n" + 
-"    	  for (var i = 0; i < markers.length; i++) {\n" + 
-"    		  var marker = markers[i];\n" + 
-"    		  google.maps.event.addListener(marker, 'click', function() { \n" + 
-"    			  infowindow.setContent(this.html);\n" + 
-"    			  infowindow.open(map,this);\n" + 
-"    			  \n" + 
+"    	  //$.getJSON('http://localhost:9000/webservices/hubs', function(jsonObj) {\n" + 
+"    	  $.getJSON('/webservices/hubs', function(jsonObj) {\n" + 
+"    		  var items = [];\n" + 
+"              var zIndex = 1; \n" + 
+"    		  $.each(jsonObj, function() {\n" + 
+"    		    hubs.push([this.address, this.latitude, this.longitude, zIndex, this.id]);\n" + 
+"    		    zIndex++;\n" + 
 "    		  });\n" + 
-"    	  }\n" + 
+"    		  \n" + 
+"    		  setMarkers(map, hubs);\n" + 
+"    		  \n" + 
+"    		});\n" + 
 "    	}\n" + 
 "\n" + 
 "    	/**\n" + 
@@ -224,11 +222,16 @@ p("<style type=\"text/css\">\n" +
 "    	        shadow: shadow,\n" + 
 "    	        icon: image,\n" + 
 "    	        shape: shape,\n" + 
-"    	        title: beach[0],\n" + 
+"    	        title: beach[0],  // this is tooltip content that shows up when hovering over the marker\n" + 
 "    	        zIndex: beach[3]\n" + 
 "    	    });\n" + 
 "    	    \n" + 
-"    	    marker.html = marker.title;\n" + 
+"    	    // define content for overlay (infowindow) window\n" + 
+"    	    // this is used below in addListener\n" + 
+"    	    marker.html = '<div class=\"marker-address block-message warning\"> <p>' + beach[0] + '</p>' +\n" + 
+"	        '<div class=\"alert-actions\"><button class=\"btn small primary\" onclick=\"return selectHub(' + beach[4] + ');\">Select This Hub</button> </div>' +\n" + 
+"	        \n" + 
+"	        '</div>' ; \n" + 
 "    	    \n" + 
 "    	    markers.push(marker);\n" + 
 "    	    \n" + 
@@ -240,14 +243,18 @@ p("<style type=\"text/css\">\n" +
 "    	    \n" + 
 "    	  }\n" + 
 "    	  \n" + 
+"    	  for (var i = 0; i < markers.length; i++) {\n" + 
+"    		  var marker = markers[i];\n" + 
+"    		  google.maps.event.addListener(marker, 'click', function() { \n" + 
+"    			  infowindow.setContent(this.html);\n" + 
+"    			  infowindow.open(map,this);\n" + 
+"    			  \n" + 
+"    		  });\n" + 
+"    	  }\n" + 
+"    	  \n" + 
 "    	  \n" + 
 "    	  \n" + 
 "    	}\n" + 
-"      \n" + 
-" \n" + 
-"      \n" + 
-"      \n" + 
-"      \n" + 
 "      \n" + 
 "    </script>\n" + 
 "\n" + 
@@ -259,28 +266,44 @@ p("<style type=\"text/css\">\n" +
 "</div>\n" + 
 "<div class=\"row\">\n" + 
 "    <div class=\"span10\">\n" + 
-"        \n" + 
-"    <form>\n" + 
+"    \n" + 
+"    \n" + 
+"    <form method=\"post\" action=\"/HeadOfficeAdminController/handleLearnerInfo\" > \n" + 
 "        <fieldset>\n" + 
 "          <legend>Learner's Details</legend>\n" + 
 "          <div class=\"clearfix\">\n" + 
 "            <label for=\"title\">Title</label>\n" + 
 "            <div class=\"input\">\n" + 
-"              <input type=\"text\" size=\"30\" name=\"title\" id=\"title\" class=\"xlarge\">\n" + 
+"              <input type=\"text\" size=\"30\" name=\"title\" id=\"title\" class=\"xlarge\" value='");// line 3
+		p(flash("title"));// line 202
+		p("'>\n" + 
+"              <span class=\"error\">");// line 202
+		p(error("title"));// line 203
+		p("</span>\n" + 
 "            </div>\n" + 
 "          </div><!-- /clearfix -->\n" + 
 "          \n" + 
 "          <div class=\"clearfix\">\n" + 
 "            <label for=\"firstName\">First Name</label>\n" + 
 "            <div class=\"input\">\n" + 
-"              <input type=\"text\" size=\"30\" name=\"firstName\" id=\"firstName\" class=\"xlarge\">\n" + 
+"              <input type=\"text\" size=\"30\" name=\"firstName\" id=\"firstName\" class=\"xlarge\" value='");// line 203
+		p(flash("firstName"));// line 210
+		p("'>\n" + 
+"              <span class=\"error\">");// line 210
+		p(error("firstName"));// line 211
+		p("</span>\n" + 
 "            </div>\n" + 
 "          </div><!-- /clearfix -->\n" + 
 "          \n" + 
 "          <div class=\"clearfix\">\n" + 
 "            <label for=\"lastName\">Last Name</label>\n" + 
 "            <div class=\"input\">\n" + 
-"              <input type=\"text\" size=\"30\" name=\"lastName\" id=\"lastName\" class=\"xlarge\">\n" + 
+"              <input type=\"text\" size=\"30\" name=\"lastName\" id=\"lastName\" class=\"xlarge\" value='");// line 211
+		p(flash("lastName"));// line 218
+		p("' >\n" + 
+"              <span class=\"error\">");// line 218
+		p(error("lastName"));// line 219
+		p("</span>\n" + 
 "            </div>\n" + 
 "          </div><!-- /clearfix -->\n" + 
 "          \n" + 
@@ -288,7 +311,12 @@ p("<style type=\"text/css\">\n" +
 "          <div class=\"clearfix\">\n" + 
 "            <label for=\"email\">Email</label>\n" + 
 "            <div class=\"input\">\n" + 
-"              <input type=\"text\" size=\"30\" name=\"email\" id=\"email\" class=\"xlarge\">\n" + 
+"              <input type=\"text\" size=\"30\" name=\"email\" id=\"email\" class=\"xlarge\" value='");// line 219
+		p(flash("email"));// line 227
+		p("'>\n" + 
+"              <span class=\"error\">");// line 227
+		p(error("email"));// line 228
+		p("</span>\n" + 
 "            </div>\n" + 
 "          </div><!-- /clearfix -->\n" + 
 "          \n" + 
@@ -299,11 +327,11 @@ p("<style type=\"text/css\">\n" +
 "            <label for=\"dob\">Date Of Birth </label>\n" + 
 "            <div class=\"input\">\n" + 
 "          \n" + 
-"           <select class=\"small\" id=\"birthdayDay\" name=\"birthdayDay\"><option value=\"-1\">Day:</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option><option value=\"6\">6</option><option value=\"7\">7</option><option value=\"8\">8</option><option value=\"9\">9</option><option value=\"10\">10</option><option value=\"11\">11</option><option value=\"12\">12</option><option value=\"13\">13</option><option value=\"14\">14</option><option value=\"15\">15</option><option value=\"16\">16</option><option value=\"17\">17</option><option value=\"18\">18</option><option value=\"19\">19</option><option value=\"20\">20</option><option value=\"21\">21</option><option value=\"22\">22</option><option value=\"23\">23</option><option value=\"24\">24</option><option value=\"25\">25</option><option value=\"26\">26</option><option value=\"27\">27</option><option value=\"28\">28</option><option value=\"29\">29</option><option value=\"30\">30</option><option value=\"31\">31</option></select>\n" + 
+"           <select class=\"small\" id=\"birthdayDay\" name=\"birthdayDay\"><option value=\"\">Day:</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option><option value=\"6\">6</option><option value=\"7\">7</option><option value=\"8\">8</option><option value=\"9\">9</option><option value=\"10\">10</option><option value=\"11\">11</option><option value=\"12\">12</option><option value=\"13\">13</option><option value=\"14\">14</option><option value=\"15\">15</option><option value=\"16\">16</option><option value=\"17\">17</option><option value=\"18\">18</option><option value=\"19\">19</option><option value=\"20\">20</option><option value=\"21\">21</option><option value=\"22\">22</option><option value=\"23\">23</option><option value=\"24\">24</option><option value=\"25\">25</option><option value=\"26\">26</option><option value=\"27\">27</option><option value=\"28\">28</option><option value=\"29\">29</option><option value=\"30\">30</option><option value=\"31\">31</option></select>\n" + 
 "           \n" + 
-"           <select class=\"small\" id=\"birthdayMonth\" name=\"birthdayMonth\"><option value=\"-1\">Month:</option><option value=\"1\">Jan</option><option value=\"2\">Feb</option><option value=\"3\">Mar</option><option value=\"4\">Apr</option><option value=\"5\">May</option><option value=\"6\">Jun</option><option value=\"7\">Jul</option><option value=\"8\">Aug</option><option value=\"9\">Sep</option><option value=\"10\">Oct</option><option value=\"11\">Nov</option><option value=\"12\">Dec</option></select> \n" + 
+"           <select class=\"small\" id=\"birthdayMonth\" name=\"birthdayMonth\"><option value=\"\">Month:</option><option value=\"1\">Jan</option><option value=\"2\">Feb</option><option value=\"3\">Mar</option><option value=\"4\">Apr</option><option value=\"5\">May</option><option value=\"6\">Jun</option><option value=\"7\">Jul</option><option value=\"8\">Aug</option><option value=\"9\">Sep</option><option value=\"10\">Oct</option><option value=\"11\">Nov</option><option value=\"12\">Dec</option></select> \n" + 
 "          \n" + 
-"          <select class=\"small\" id=\"birthdayYear\" name=\"birthdayYear\"><option value=\"-1\">Year:</option>\n" + 
+"          <select class=\"small\" id=\"birthdayYear\" name=\"birthdayYear\"><option value=\"\">Year:</option>\n" + 
 "          <option value=\"1950\">1950</option><option value=\"1949\">1949</option><option value=\"1948\">1948</option><option value=\"1947\">1947</option><option value=\"1946\">1946</option><option value=\"1945\">1945</option><option value=\"1944\">1944</option><option value=\"1943\">1943</option><option value=\"1942\">1942</option><option value=\"1941\">1941</option><option value=\"1940\">1940</option><option value=\"1939\">1939</option><option value=\"1938\">1938</option><option value=\"1937\">1937</option><option value=\"1936\">1936</option><option value=\"1935\">1935</option><option value=\"1934\">1934</option><option value=\"1933\">1933</option><option value=\"1932\">1932</option><option value=\"1931\">1931</option><option value=\"1930\">1930</option><option value=\"1929\">1929</option><option value=\"1928\">1928</option><option value=\"1927\">1927</option><option value=\"1926\">1926</option><option value=\"1925\">1925</option><option value=\"1924\">1924</option><option value=\"1923\">1923</option><option value=\"1922\">1922</option><option value=\"1921\">1921</option><option value=\"1920\">1920</option><option value=\"1919\">1919</option><option value=\"1918\">1918</option><option value=\"1917\">1917</option><option value=\"1916\">1916</option><option value=\"1915\">1915</option><option value=\"1914\">1914</option><option value=\"1913\">1913</option><option value=\"1912\">1912</option><option value=\"1911\">1911</option><option value=\"1910\">1910</option><option value=\"1909\">1909</option><option value=\"1908\">1908</option><option value=\"1907\">1907</option><option value=\"1906\">1906</option><option value=\"1905\">1905</option>\n" + 
 "          <option value=\"1905\">1904</option>\n" + 
 "          <option value=\"1905\">1903</option>\n" + 
@@ -315,22 +343,40 @@ p("<style type=\"text/css\">\n" +
 "          <option value=\"1905\">1897</option>\n" + 
 "          \n" + 
 "          </select>\n" + 
-"          \n" + 
+"          ");// line 228
+		if (validation.hasError("birthdayDay") || validation.hasError("birthdayMonth") || validation.hasError("birthdayYear") ) {// line 255
+		p("          <span class=\"error\">Required</span>\n" + 
+"          ");// line 255
+		}// line 257
+		p("          \n" + 
 "          </div>\n" + 
 "          </div><!-- /clearfix -->\n" + 
 "          \n" + 
 "          <div class=\"clearfix\">\n" + 
 "            <label for=\"address\">Address</label>\n" + 
 "            <div class=\"input\">\n" + 
-"              <input type=\"text\" size=\"30\" name=\"address\" id=\"address\" class=\"xlarge\">\n" + 
+"              <input type=\"text\" size=\"30\" name=\"address\" id=\"address\" class=\"xlarge\" value='");// line 257
+		p(flash("address"));// line 265
+		p("'><button class=\"btn info\" onclick=\"return checkAddress();\">Check Address</button>\n" + 
+"              <span class=\"error\">");// line 265
+		p(error("address"));// line 266
+		p("</span>\n" + 
 "            </div>\n" + 
 "          </div><!-- /clearfix -->\n" + 
 "\n" + 
 "        <fieldset>\n" + 
 "          <legend>Hubs</legend>\n" + 
 "          \n" + 
+"          ");// line 266
+		if (validation.hasError("hubId")) {// line 273
+		p("            <div class=\"error\" >No Hub was selected. Hub selection is required.</div>\n" + 
 "          \n" + 
-"          <div id=\"map_canvas\"> </div>\n" + 
+"          ");// line 273
+		}// line 276
+		p("          <div id=\"map_canvas\"> </div>\n" + 
+"          \n" + 
+"          <input type=\"hidden\" id=\"hubId\" name=\"hubId\" value=\"\" />\n" + 
+"          \n" + 
 "          \n" + 
 "          <div class=\"actions\">\n" + 
 "            <input type=\"submit\" value=\"Submit\" class=\"btn primary\">&nbsp;&nbsp;&nbsp;&nbsp;<button class=\"btn danger\" type=\"reset\">Clear All Fields</button>\n" + 
@@ -357,7 +403,7 @@ p("<style type=\"text/css\">\n" +
 "        \n" + 
 "        \n" + 
 "    </div>\n" + 
-"</div>\n");// line 3
+"</div>\n");// line 276
 		
 	}
 
